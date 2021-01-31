@@ -1,7 +1,8 @@
-package br.com.contacorrente.model;
+package br.com.contabancaria.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,27 +10,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="transacao")
-public class Transacao {
-		
+@Table(name="conta_corrente")
+public class ContaCorrente {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable = false)
-	private int tipo;
-	
-	@Column(name = "data_hora", nullable= false)
-	private LocalDateTime dataHora = LocalDateTime.now();
+	private String codigo;
 	
 	@Column(nullable = false)
-	private BigDecimal valor;
+	private String agencia;
 	
-	//MAPEAR CONTA DA TRANSACAO
+	@Column(nullable = false)
+	private BigDecimal saldo;
+	
+	@Transient
+	private List<Transacao> transacoes = new LinkedList<>();
 
 }
