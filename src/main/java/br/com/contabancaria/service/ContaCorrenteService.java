@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import br.com.contabancaria.repository.ContaCorrenteRepository;
+import br.com.contabancaria.dto.ContaCorrenteDTO;
 import br.com.contabancaria.model.ContaCorrente;
 
 @Service
@@ -18,8 +19,10 @@ public class ContaCorrenteService {
 		return contaCorrenteRepository.findAll();
 	}
 	
-	public ContaCorrente salvar(ContaCorrente contaCorrente) {
-		return contaCorrenteRepository.save(contaCorrente);
+	public ContaCorrenteDTO salvar(ContaCorrenteDTO contaCorrenteDTO) {
+		ContaCorrente contaCorrente = contaCorrenteDTO.mapperToContaCorrente();
+		contaCorrenteRepository.save(contaCorrente);
+		return contaCorrente.getContaCorrenteDTO();
 	}
 	
 	public void deletar(Long id) {

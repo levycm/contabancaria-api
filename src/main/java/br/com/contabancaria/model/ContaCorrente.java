@@ -1,8 +1,7 @@
 package br.com.contabancaria.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,15 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.contabancaria.dto.ContaCorrenteDTO;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name="conta_corrente")
-public class ContaCorrente {
+public class ContaCorrente implements Serializable {
 	
+	private static final long serialVersionUID = -9041541206855238962L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,7 +35,27 @@ public class ContaCorrente {
 	@Column
 	private BigDecimal saldo;
 	
-	@Transient
-	private List<Transacao> transacoes = new LinkedList<>();
+	public ContaCorrente() {}
+
+	public ContaCorrente(Long id, String codigo, String agencia, BigDecimal saldo) {
+		this.id = id;
+		this.codigo = codigo;
+		this.agencia = agencia;
+		this.saldo = saldo;
+	}
+	
+	public static ContaCorrente of(Long id, String codigo, String agencia, BigDecimal saldo) {
+		return new ContaCorrente(id, codigo, agencia, saldo);
+	}
+	
+	@JsonIgnore
+	public ContaCorrenteDTO getContaCorrenteDTO() {
+		return ContaCorrenteDTO.of(id, codigo, agencia, saldo);
+	}
+	
+	
+	
+//	@Transient
+//	private List<Transacao> transacoes = new LinkedList<>();
 
 }
