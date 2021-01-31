@@ -34,7 +34,7 @@ public class Transacao {
 	private BigDecimal valor;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_conta_corrente")
 	private ContaCorrente contaCorrente;
 
 }
