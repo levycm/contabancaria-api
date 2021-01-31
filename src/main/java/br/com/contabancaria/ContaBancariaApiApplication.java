@@ -1,13 +1,13 @@
-package br.com.contacorrente;
+package br.com.contabancaria;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ContaCorrenteApiApplication {
+public class ContaBancariaApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ContaCorrenteApiApplication.class, args);
+		SpringApplication.run(ContaBancariaApiApplication.class, args);
 	}
 
 }
