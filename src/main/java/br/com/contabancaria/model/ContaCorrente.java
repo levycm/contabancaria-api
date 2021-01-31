@@ -29,7 +29,7 @@ public class ContaCorrente {
 	@Column(nullable = false)
 	private String agencia;
 	
-	@Column(nullable = false)
+	@Column
 	private BigDecimal saldo;
 	
 	@Transient

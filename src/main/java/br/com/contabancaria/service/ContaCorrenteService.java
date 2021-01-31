@@ -21,5 +21,10 @@ public class ContaCorrenteService {
 	public ContaCorrente salvar(ContaCorrente contaCorrente) {
 		return contaCorrenteRepository.save(contaCorrente);
 	}
+	
+	public void deletar(Long id) {
+		ContaCorrente contaCorrente = contaCorrenteRepository.findById(id).get();
+		contaCorrenteRepository.delete(contaCorrente);
+	}
 
 }
