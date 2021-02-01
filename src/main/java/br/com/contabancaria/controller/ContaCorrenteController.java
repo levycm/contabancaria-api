@@ -20,20 +20,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/conta-corrente")
+@RequestMapping("/api/conta-corrente")
 @Api(value = "Conta Corrente")
 public class ContaCorrenteController {
 	
 	@Autowired
 	private ContaCorrenteService contaCorrenteService;
 	
-	@GetMapping
+	@GetMapping("/lista")
 	@ApiOperation(value = "Consulta todas as contas correntes cadastradas.")
 	public List<ContaCorrente> listar(){
 		return contaCorrenteService.listarContas();
 	}
 	
-	@PostMapping
+	@PostMapping("/cadastra")
 	public ResponseEntity<ContaCorrenteDTO> criar(@RequestBody ContaCorrenteDTO contaCorrenteDTO){
 		ContaCorrenteDTO novaContaCorrenteDTO = contaCorrenteService.salvar(contaCorrenteDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(novaContaCorrenteDTO);
