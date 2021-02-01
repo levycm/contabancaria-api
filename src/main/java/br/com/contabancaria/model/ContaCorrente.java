@@ -48,7 +48,6 @@ public class ContaCorrente implements Serializable {
 		return new ContaCorrente(id, codigo, agencia, saldo);
 	}
 	
-	@JsonIgnore
 	public ContaCorrenteDTO getContaCorrenteDTO() {
 		return ContaCorrenteDTO.of(id, codigo, agencia, saldo);
 	}

@@ -4,7 +4,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.contabancaria.repository.ContaCorrenteRepository;
 import br.com.contabancaria.dto.ContaCorrenteDTO;
@@ -16,8 +19,10 @@ public class ContaCorrenteService {
 	@Autowired
 	ContaCorrenteRepository contaCorrenteRepository;
 	
-	public List<ContaCorrente> listarContas() {
-		return contaCorrenteRepository.findAll();
+	public List<ContaCorrenteDTO> listarContas() {
+		Iterable<ContaCorrente> contaCorrentes = contaCorrenteRepository.findAll();
+        return Lists.newArrayList(contaCorrentes).stream().map(conta -> conta.getContaCorrenteDTO())
+                .collect(Collectors.toList());
 	}
 	
 	public ContaCorrenteDTO salvar(ContaCorrenteDTO contaCorrenteDTO) {
@@ -38,4 +43,5 @@ public class ContaCorrenteService {
 		ContaCorrente contaCorrente = contaCorrenteRepository.getOne(contaCorrenteDTO.getId());
 		contaCorrenteRepository.delete(contaCorrente);
 	}
+	
 }

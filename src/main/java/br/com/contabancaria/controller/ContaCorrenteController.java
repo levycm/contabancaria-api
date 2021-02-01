@@ -13,27 +13,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.contabancaria.dto.ConsultaSaldoDTO;
 import br.com.contabancaria.dto.ContaCorrenteDTO;
 import br.com.contabancaria.model.ContaCorrente;
 import br.com.contabancaria.service.ContaCorrenteService;
+import br.com.contabancaria.service.TransacaoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/conta-corrente")
-@Api(value = "Conta Corrente")
+@Api(value = "Conta Corrente" )
 public class ContaCorrenteController {
 	
 	@Autowired
 	private ContaCorrenteService contaCorrenteService;
 	
-	@GetMapping("/lista")
+	@Autowired
+	private TransacaoService transacaoService;
+	
+	@GetMapping
 	@ApiOperation(value = "Consulta todas as contas correntes cadastradas.")
-	public List<ContaCorrente> listar(){
-		return contaCorrenteService.listarContas();
+	public	ResponseEntity<List<ContaCorrenteDTO>> listar(){
+		return new ResponseEntity<>(contaCorrenteService.listarContas(), HttpStatus.OK);
 	}
 	
-	@PostMapping("/cadastra")
+	@PostMapping
 	public ResponseEntity<ContaCorrenteDTO> criar(@RequestBody ContaCorrenteDTO contaCorrenteDTO){
 		ContaCorrenteDTO novaContaCorrenteDTO = contaCorrenteService.salvar(contaCorrenteDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(novaContaCorrenteDTO);
@@ -49,6 +54,12 @@ public class ContaCorrenteController {
 	public ResponseEntity<ContaCorrenteDTO> deletar(@RequestBody ContaCorrenteDTO contaCorrenteDTO){
 		contaCorrenteService.deletar(contaCorrenteDTO);
 		return ResponseEntity.ok(contaCorrenteDTO);
+	}
+	
+	@GetMapping("/saldo")
+	public ResponseEntity<ConsultaSaldoDTO> editar(@RequestBody ConsultaSaldoDTO consultaSaldoDTO){
+		ConsultaSaldoDTO consultaSaldo = transacaoService.consultarSaldo(consultaSaldoDTO);
+		return ResponseEntity.ok(consultaSaldo);
 	}
 
 }

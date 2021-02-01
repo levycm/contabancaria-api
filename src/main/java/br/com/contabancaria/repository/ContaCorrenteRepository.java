@@ -7,5 +7,7 @@ import br.com.contabancaria.model.ContaCorrente;
 
 @Repository
 public interface ContaCorrenteRepository extends JpaRepository<ContaCorrente, Long> {
+	
+	ContaCorrente findByCodigoAndAgencia(String codigo, String agencia);
 
 }
