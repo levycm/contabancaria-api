@@ -1,5 +1,6 @@
 package br.com.contabancaria.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,16 @@ public class ContaCorrenteService {
 		return contaCorrente.getContaCorrenteDTO();
 	}
 	
-	public void deletar(Long id) {
-		ContaCorrente contaCorrente = contaCorrenteRepository.findById(id).get();
+	public ContaCorrenteDTO atualizar(ContaCorrenteDTO contaCorrenteDTO) {
+		ContaCorrente contaCorrenteDb = contaCorrenteRepository.getOne(contaCorrenteDTO.getId());
+		ContaCorrente contaCorrente = contaCorrenteDTO.mapperToContaCorrente();
+		BeanUtils.copyProperties(contaCorrente, contaCorrenteDb, "id");
+		contaCorrenteRepository.save(contaCorrente);
+		return contaCorrente.getContaCorrenteDTO();
+	}
+	
+	public void deletar(ContaCorrenteDTO contaCorrenteDTO) {
+		ContaCorrente contaCorrente = contaCorrenteRepository.getOne(contaCorrenteDTO.getId());
 		contaCorrenteRepository.delete(contaCorrente);
 	}
-
 }

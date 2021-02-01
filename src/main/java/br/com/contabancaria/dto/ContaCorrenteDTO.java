@@ -19,7 +19,7 @@ public class ContaCorrenteDTO implements Serializable {
 	
 	public ContaCorrenteDTO() {}
 	
-	public ContaCorrenteDTO(Long id, String codigo, String agencia, BigDecimal saldo) {
+	private ContaCorrenteDTO(Long id, String codigo, String agencia, BigDecimal saldo) {
 		this.id = id;
 		this.codigo = codigo;
 		this.agencia = agencia;
@@ -34,9 +34,5 @@ public class ContaCorrenteDTO implements Serializable {
 	public static ContaCorrenteDTO of(Long id, String codigo, String agencia, BigDecimal saldo) {
 		return new ContaCorrenteDTO(id, codigo, agencia, saldo);
 	}
-
-
-
-	
 
 }
