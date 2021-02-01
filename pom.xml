@@ -11,7 +11,7 @@
 	<groupId>br.com.contabancaria</groupId>
 	<artifactId>ContaBancaria-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ContaBancaria-api</name>
+	<name>contaBancaria-api</name>
 	<description>Aplicação modelo pra simular uma conta bancaria e suas operações.</description>
 	<properties>
 		<java.version>11</java.version>
