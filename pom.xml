@@ -11,10 +11,10 @@
 	<groupId>br.com.contabancaria</groupId>
 	<artifactId>ContaBancaria-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>contaBancaria-api</name>
+	<name>ContaBancaria-api</name>
 	<description>Aplicação modelo pra simular uma conta bancaria e suas operações.</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
