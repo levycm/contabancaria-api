@@ -11,21 +11,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.contabancaria.dto.ContaCorrenteDTO;
 import br.com.contabancaria.model.ContaCorrente;
 import br.com.contabancaria.service.ContaCorrenteService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/conta-corrente")
+@Api(value = "Conta Corrente")
 public class ContaCorrenteController {
 	
 	@Autowired
 	private ContaCorrenteService contaCorrenteService;
 	
 	@GetMapping
+	@ApiOperation(value = "Consulta todas as contas correntes cadastradas.")
 	public List<ContaCorrente> listar(){
 		return contaCorrenteService.listarContas();
 	}
