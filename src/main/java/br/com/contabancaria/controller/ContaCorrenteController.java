@@ -57,7 +57,7 @@ public class ContaCorrenteController {
 	}
 	
 	@GetMapping("/saldo")
-	public ResponseEntity<ConsultaSaldoDTO> editar(@RequestBody ConsultaSaldoDTO consultaSaldoDTO){
+	public ResponseEntity<ConsultaSaldoDTO> consultarSaldo(@RequestBody ConsultaSaldoDTO consultaSaldoDTO){
 		ConsultaSaldoDTO consultaSaldo = transacaoService.consultarSaldo(consultaSaldoDTO);
 		return ResponseEntity.ok(consultaSaldo);
 	}
